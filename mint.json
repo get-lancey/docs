@@ -7,7 +7,7 @@
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#FF4F00",
+    "primary": "#ffffff",
     "light": "#FF4F00",
     "dark": "#FF4F00"
   },
@@ -34,7 +34,13 @@
     },
     {
       "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
+      "pages": [
+        "essentials/markdown",
+        "essentials/code",
+        "essentials/images",
+        "essentials/settings",
+        "essentials/navigation"
+      ]
     },
     {
       "group": "API Documentation",
