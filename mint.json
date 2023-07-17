@@ -33,13 +33,15 @@
       "pages": ["introduction", "quickstart", "development"]
     },
     {
-      "group": "Essentials",
+      "group": "Features",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation"
+        "features/Auth & User Management",
+        "features/Product Adoption",
+        "features/Campaigns",
+        "features/Feature Management",
+        "features/Billing Management",        
+        "features/Product Qualified Leads (PQLs)",
+        "features/Autopilot"
       ]
     },
     {
