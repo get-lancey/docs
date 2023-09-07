@@ -11,22 +11,22 @@
     "light": "#FF4F00",
     "dark": "#FF4F00"
   },
-  "analytics": {
-    "posthog": {
-      "apiKey": "phc_HPGhSfdff54Lgic78jYDxBMDWS5VZ5Okgw6ua9gqgJ",
-      "apiHost": "https://d2aymk9361dfrf.cloudfront.net"
-    }
-  },
   "topbarLinks": [
     {
-      "name": "Home page",
-      "url": "https://lancey.ai"
+      "name": "Documentation",
+      "url": "https://mintlify.com/docs"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
     "url": "https://demo.lancey.ai"
   },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
   "navigation": [
     {
       "group": "Get Started",
@@ -36,28 +36,25 @@
       "group": "Features",
       "pages": [
         "features/auth",
-        "features/workflows",
-        "features/autopilot",
         "features/product-adoption",
+        "features/campaigns",
         "features/feature-management",
-        "features/billing-management",
-        "features/pqls"
-
+        "features/billing-management",        
+        "features/pqls",
+        "features/autopilot"
       ]
     },
     {
-      "group": "Data",
-      "pages": [
-        "data/events",
-        "data/persons",
-        "data/companies"
-      ]
+      "group": "API Documentation",
+      "pages": ["api-reference/authentication"]
     },
     {
-      "group": "SDK",
+      "group": "Endpoint Examples",
       "pages": [
-        "sdk/node-js",
-        "sdk/react-javascript"      
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/update",
+        "api-reference/endpoint/delete"
       ]
     }
   ],
