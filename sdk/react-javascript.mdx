@@ -1,0 +1,118 @@
+---
+title: 'React/Javascript'
+description: 'Learn how to integrate Lancey in React/JS project'
+icon: 'react'
+---
+
+### Public key
+
+You'll need your `Public key` which is found within project settings.
+
+### Installation
+
+You can install the Lancey SDK via several different options:
+
+<CodeGroup>
+
+```javascript npm
+npm install @lancey-app/web
+
+```
+
+```javascript yarn
+yarn add @lancey-app/web 
+
+```
+
+```javascript pnpm
+pnpm add @lancey-app/web
+
+```
+
+</CodeGroup>
+
+### React installation
+
+```tsx
+// npm install @lancey-app/web or or yarn add @lancey-app/web or pnpm add @lancey-app/web
+
+  // In your app
+import { LanceyProvider, useLancey } from '@lancey-app/web';
+// or
+const { loadLancey, useLancey } from "@lancey-app/web";
+
+// Now go ahead and initialize LanceyProvider
+const App = () => {
+  return (
+    <LanceyProvider
+      apiKey={"YOUR PUBLIC KEY HERE"}  //note: do not use the secret key on frontend install
+      options={{
+        host: "https://api.demo.lancey.ai",
+      }}
+    >
+    <MyComponent/>
+  </LanceyProvider>
+  );
+}
+
+// You can now use the Lancey React hook to access the Lancey SDK
+
+const MyComponent = () => {
+  const lancey = useLancey();
+
+  lancey.identify("user_1234");
+
+  return <div>My Component</div>;
+}
+```
+
+### Identifying persons
+
+Identifying persons is one of the first things you should do. This is usually done once your user(s) have logged in successfully. Having an identified person allows you to track events against them.
+
+The following snippet shows how users can be identified.
+
+```tsx
+
+lancey.identify(
+    'user_id', //replace 'user_id' with your users unique identifier
+    { email: 'lance@lancey.com', name: 'Lance Lot' }, //set user properties
+    extra?: {
+      distinctCompanyId: 'company_id', //optional: replace 'company_id' with unique identifier for a company in your system
+      companyProperties: {
+        name: 'Knights Inc'
+      }; //optional: set properties for companies
+    }
+  ):
+```
+
+### Identifying companies
+
+Lancey has first class support for companies. This allows you to group different persons under one group for better attribution and tracking. For all B2B folks, you should make sure to connect persons to the company.
+
+```tsx
+lancey.identifyCompany(
+	'company_id', //replace 'company_id' with unique identifier for a company in your system
+  { name: 'Knights Inc' } //set company properties
+);
+```
+
+### Tracking events
+
+Tracking events allows you to gain an insight into what users are doing within your app. Events are using within Lancey to build powerful segments and workflows.
+
+```tsx
+
+lancey.track(
+  'user clicked upgrade',
+  { plan: 'Advanced' } // optional: set event properties to understand what took place
+);
+```
+
+### Reset after logout
+
+When a user logs out, you should call `reset` to unlink any future events made on that device with that user.
+
+```tsx
+lancey.reset();
+```

@@ -1,0 +1,30 @@
+---
+title: 'Identifying persons'
+icon: 'user'
+---
+
+## Overview
+
+Persons/users are used interchangeably and they denote a single unique person who is a consumer of your product.
+
+Being such a core unit within Lancey, its important you're aware of how to add persons within Lancey.
+
+### Identifying persons
+
+Before you can identify persons in Lancey, make sure you have the appropriate [Lancey SDK installed](/sdk).
+
+
+```tsx
+
+lancey.identify(
+    'user_id', //replace 'user_id' with your users unique identifier
+    { email: 'lance@lancey.com', name: 'Lance Lot' }, //set user properties
+    extra?: {
+      distinctCompanyId: 'company_id', //optional: replace 'company_id' with unique identifier for a company in your system
+      companyProperties: {
+        name: 'Knights Inc'
+      }; //optional: set properties for companies
+    }
+  ):
+```
+
