@@ -1,0 +1,61 @@
+---
+title: 'Zapier'
+description: 'Integrate 6000+ apps with Lancey'
+---
+## Grain
+### Prerequisites
+
+- A Starter, Business, or Enterprise account with Zapier integration enabled.
+- A paid Zapier account with Multi-step Zaps enabled.
+- Access token from Lancey (generate from [Lancey Settings](https://app.lancey.ai/settings/access-tokens)).
+
+### Setup
+
+2. Click the "Use this Zap" button below to open Zapier and start the setup process:
+   [![Use this Zap](https://path/to/zap-button.png)](https://zapier.com/apps/grain/integrations/lancey/quick-setup)
+3. Follow the prompts to connect your Lancey account using the access token.
+4. In Zapier, set the trigger app to Grain and the action to "Get Meeting".
+5. Pass the meeting information to Lancey using the access token for authorization.
+
+> **Note:** Due to the nature of the integration, Lancey will begin to bring in new calls from the moment the integration is connected. It will not bring in historical calls.
+
+### Setup Fields
+
+#### Meeting ID
+- **Description:** Enter the meeting ID from your trigger app.
+- **Required:** Yes
+
+#### Meeting Source
+- **Description:** Select the source of the meeting.
+- **Required:** Yes
+
+#### Transcript
+- **Description:** Please pass in your transcript.
+- **Required:** Yes
+
+#### Participant Names
+- **Description:** Enter the names of the participants in the meeting.
+- **Required:** No
+
+#### Participant Emails
+- **Description:** Enter the email addresses of the participants.
+- **Required:** No
+
+#### Meeting Start Datetime
+- **Description:** Enter the start date and time of the meeting.
+- **Required:** No
+
+#### Meeting End Datetime
+- **Description:** Enter the end date and time of the meeting.
+- **Required:** No
+
+#### Meeting Owner Email
+- **Description:** Enter the email address of the person who created the meeting.
+- **Required:** No
+
+### Features
+
+- Lancey continuously looks for new recorded conversations and brings them as feedback items.
+- Lancey's AI analyzes the calls, creates a short summary, identifies all of the feature requests in the call, and creates suggestions to link to existing ones in the backlog or create new ones.
+
+For more information, visit [Lancey.ai](https://www.lancey.ai/).
