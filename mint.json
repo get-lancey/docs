@@ -11,7 +11,7 @@
     "light": "#FF4F00",
     "dark": "#FF4F00"
   },
-  "theme": "venus",
+  "theme": "quill",
   "analytics": {
     "posthog": {
       "apiKey": "phc_HPGhSfdff54Lgic78jYDxBMDWS5VZ5Okgw6ua9gqgJ",
