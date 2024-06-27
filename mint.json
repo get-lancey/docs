@@ -30,7 +30,10 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart"]
+      "pages": [
+        "introduction",
+        "quickstart"
+      ]
     },
     {
       "group": "Features",
@@ -42,7 +45,12 @@
         "features/feature-management",
         "features/billing-management",
         "features/pqls"
-
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "integrations/zapier"
       ]
     },
     {
@@ -57,7 +65,7 @@
       "group": "SDK",
       "pages": [
         "sdk/node-js",
-        "sdk/react-javascript"      
+        "sdk/react-javascript"
       ]
     }
   ],
