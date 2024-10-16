@@ -11,7 +11,7 @@
     "light": "#FF4F00",
     "dark": "#FF4F00"
   },
-  "theme": "quill",
+  "theme": "prism",
   "analytics": {
     "posthog": {
       "apiKey": "phc_HPGhSfdff54Lgic78jYDxBMDWS5VZ5Okgw6ua9gqgJ",
@@ -26,7 +26,7 @@
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://demo.lancey.ai"
+    "url": "https://app.lancey.ai"
   },
   "navigation": [
     {
@@ -39,34 +39,27 @@
     {
       "group": "Features",
       "pages": [
-        "features/auth",
-        "features/workflows",
-        "features/autopilot",
-        "features/product-adoption",
-        "features/feature-management",
-        "features/billing-management",
-        "features/pqls"
+        "features/feedback",
+        "features/insights",
+        "features/initiatives",
+        "features/releases"
       ]
     },
     {
       "group": "Integrations",
       "pages": [
-        "integrations/grain"
+        "integrations/grain",
+        "integrations/gong",
+        "integrations/zendesk",
+        "integrations/intercom"
+
       ]
     },
     {
       "group": "Data",
       "pages": [
-        "data/events",
-        "data/persons",
+        "data/contacts",
         "data/companies"
-      ]
-    },
-    {
-      "group": "SDK",
-      "pages": [
-        "sdk/node-js",
-        "sdk/react-javascript"
       ]
     }
   ],
