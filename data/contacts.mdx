@@ -1,30 +1,18 @@
 ---
-title: 'Identifying persons'
+title: 'Contacts'
 icon: 'user'
 ---
 
 ## Overview
 
-Persons/users are used interchangeably and they denote a single unique person who is a consumer of your product.
+People/Users/Persons/Contacts are used interchangeably and they denote a single unique person who is attached to a feedback item within Lancey.
 
-Being such a core unit within Lancey, its important you're aware of how to add persons within Lancey.
+Being such a core unit within Lancey, its important to understand how contacts get added to Lancey.
 
-### Identifying persons
+### Adding contacts
 
-Before you can identify persons in Lancey, make sure you have the appropriate [Lancey SDK installed](/sdk).
+You can manually add contacts by heading to the [Contacts](https://app.lancey.ai/contacts/people/views/all) page.
 
+### Syncing contacts
 
-```tsx
-
-lancey.identify(
-    'user_id', //replace 'user_id' with your users unique identifier
-    { email: 'lance@lancey.com', name: 'Lance Lot' }, //set user properties
-    extra?: {
-      distinctCompanyId: 'company_id', //optional: replace 'company_id' with unique identifier for a company in your system
-      companyProperties: {
-        name: 'Knights Inc'
-      }; //optional: set properties for companies
-    }
-  ):
-```
-
+Whenever you automatically import a piece of feedback (sales call, support ticket, Github issue,etc...), Lancey will generate a contact to associate with that item. If a contact already exists, it will use that instead.

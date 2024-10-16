@@ -5,17 +5,14 @@ icon: 'building'
 
 ## Overview
 
-Companies refer to group of persons. In B2B this is typically the organization that connect the individual persons.
+Companies/Accounts are used interchangeably and they denote a single unique Company who is attached to the [Contacts](/data/contacts) within Lancey.
 
-Being such a core unit within Lancey, its important you're aware of how to add persons within Lancey.
+Being such a core unit within Lancey, its important to understand how companies get added to Lancey.
 
-### Identifying companies
+### Adding Companies
 
-Lancey has first class support for companies. This allows you to group different persons under one group for better attribution and tracking. For all B2B folks, you should make sure to connect persons to the company.
+You can manually add company by heading to the [Company](https://app.lancey.ai/contacts/companies/views/all) page.
 
-```tsx
-lancey.identifyCompany(
-	'company_id', //replace 'company_id' with unique identifier for a company in your system
-  { name: 'Knights Inc' } //set company properties
-);
-```
+### Syncing Companies
+
+Whenever you automatically import a piece of feedback (sales call, support ticket, Github issue,etc...), Lancey will generate a company based on the domain of the contact's email to associate with that item. If a company already exists, it will use that instead.

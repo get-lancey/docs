@@ -55,9 +55,6 @@
         "integrations/hubspot",
         "integrations/salesforce",
         "integrations/slack"
-
-
-
       ]
     },
     {
