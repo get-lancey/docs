@@ -11,7 +11,7 @@
     "light": "#FF4F00",
     "dark": "#FF4F00"
   },
-  "theme": "prism",
+  "theme": "willow",
   "analytics": {
     "posthog": {
       "apiKey": "phc_L8cqHPgpKcJ6avzxp4q9ZLSiNSBgGSmJ64CkLaD1Drd",
@@ -26,14 +26,13 @@
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://app.lancey.ai"
+    "url": "https://insight.lancey.ai"
   },
   "navigation": [
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
-        "quickstart"
+        "introduction"
       ]
     },
     {
