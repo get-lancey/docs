@@ -11,7 +11,7 @@
     "light": "#FF4F00",
     "dark": "#FF4F00"
   },
-  "theme": "willow",
+  "theme": "prism",
   "analytics": {
     "posthog": {
       "apiKey": "phc_L8cqHPgpKcJ6avzxp4q9ZLSiNSBgGSmJ64CkLaD1Drd",
