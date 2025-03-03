@@ -37,15 +37,6 @@
       ]
     },
     {
-      "group": "Features",
-      "pages": [
-        "features/feedback",
-        "features/insights",
-        "features/initiatives",
-        "features/releases"
-      ]
-    },
-    {
       "group": "Integrations",
       "pages": [
         "integrations/grain",
