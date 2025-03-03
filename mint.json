@@ -38,9 +38,9 @@
     {
       "group": "Integrations",
       "pages": [
-        "integrations/grain",
         "integrations/gong",
         "integrations/zendesk",
+        "integrations/grain",
         "integrations/intercom",
         "integrations/hubspot",
         "integrations/salesforce",

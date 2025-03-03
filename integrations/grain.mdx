@@ -2,69 +2,95 @@
 title: 'Grain'
 description: 'Find feature requests in your Grain calls and connect them to your backlog'
 ---
+
 ### Prerequisites
 
-- A Starter, Business, or Enterprise account with Zapier integration enabled.
-- A paid Zapier account with Multi-step Zaps enabled.
-- Access token from Lancey (generate from [Lancey Settings](https://app.lancey.ai/settings/access-tokens)).
+* A Starter, Business, or Enterprise account with Zapier integration enabled.
+
+* A paid Zapier account with Multi-step Zaps enabled.
+
+* Access token from Lancey (generate from [Lancey Settings](https://app.lancey.ai/settings/access-tokens)).
 
 > **Note:** Lancey will only begin to bring in new calls from the moment the integration is connected. It will not bring in historical calls.
 
 ### Quick Setup
+
 1. Generate your Lancey access token from [Lancey Settings](https://app.lancey.ai/settings/access-tokens).
-2. Click the "Use this Zap" button below to open Zapier and start the setup process:
-   [![Use this Zap](https://path/to/zap-button.png)](https://zapier.com/apps/grain/integrations/lancey/quick-setup)
-3. Follow the prompts to connect your Lancey account using the access token.
-4. In Zapier, set the trigger app to Grain and the action to "Get Meeting".
-5. Pass the meeting information to Lancey using the access token for authorization.
+
+2. Follow the prompts to connect your Lancey account using the access token.
+
+3. In Zapier, set the trigger app to Grain and the action to "Get Meeting".
+
+4. Pass the meeting information to Lancey using the access token for authorization.
 
 ### Manual Setup
+
 1. Generate your Lancey access token from [Lancey Settings](https://app.lancey.ai/settings/access-tokens).
+
 2. Log in to your Zapier account and click on "Make a Zap".
+
 3. Set the trigger app to Grain and choose the trigger event "Recording Added in Grain". Follow the prompts to connect your Grain account.
+
 4. Add an action step, set the app to Grain, and choose "Get Recording" as the action event. Follow the prompts to get the recording details.
+
 5. Add another action step, set the app to Lancey, and choose "Save Meeting". Connect your Lancey account using the access token generated in step 1.
+
 6. Configure Setup Fields
+
 7. Test the Zap to ensure it's working correctly, then turn on the Zap.
-
-
 
 ### Setup Fields
 
 #### Meeting ID
-- **Description:** The unique identifier for the meeting. This ID is provided by your trigger app (e.g., Grain) and ID can be found in the details of the recording.
-- **Required:** Yes
+
+* **Description:** The unique identifier for the meeting. This ID is provided by your trigger app (e.g., Grain) and ID can be found in the details of the recording.
+
+* **Required:** Yes
 
 #### Meeting Source
-- **Description:** The platform or service from which the meeting originates (e.g., Zoom, Google Meet).
-- **Required:** Yes
+
+* **Description:** The platform or service from which the meeting originates (e.g., Zoom, Google Meet).
+
+* **Required:** Yes
 
 #### Transcript
-- **Description:** The full text transcription of the meeting's audio, which will be analyzed for insights.
-- **Required:** Yes
+
+* **Description:** The full text transcription of the meeting's audio, which will be analyzed for insights.
+
+* **Required:** Yes
 
 #### Participant Names
-- **Description:** Names of all the individuals who participated in the meeting. This helps in identifying speakers.
-- **Required:** No
+
+* **Description:** Names of all the individuals who participated in the meeting. This helps in identifying speakers.
+
+* **Required:** No
 
 #### Participant Emails
-- **Description:** Email addresses of the participants, useful for follow-up and further communication.
-- **Required:** No
+
+* **Description:** Email addresses of the participants, useful for follow-up and further communication.
+
+* **Required:** No
 
 #### Meeting Start Datetime
-- **Description:** The date and time when the meeting started, in a recognizable format (e.g., YYYY-MM-DD HH:MM).
-- **Required:** No
+
+* **Description:** The date and time when the meeting started, in a recognizable format (e.g., YYYY-MM-DD HH:MM).
+
+* **Required:** No
 
 #### Meeting End Datetime
-- **Description:** The date and time when the meeting ended, in a recognizable format (e.g., YYYY-MM-DD HH:MM).
-- **Required:** No
+
+* **Description:** The date and time when the meeting ended, in a recognizable format (e.g., YYYY-MM-DD HH:MM).
+
+* **Required:** No
 
 #### Meeting Owner Email
-- **Description:** The email address of the person who scheduled or created the meeting. 
-- **Required:** No
 
+* **Description:** The email address of the person who scheduled or created the meeting.
+
+* **Required:** No
 
 ### Features
 
-- Lancey actively monitors for new recorded meetings and transforms them into actionable feedback.
-- Lancey's AI provides concise summaries of meetings, highlights feature requests, and suggests how to link them to existing backlog items or create new ones.
+* Lancey actively monitors for new recorded meetings and transforms them into actionable feedback.
+
+* Lancey's AI provides concise summaries of meetings, highlights feature requests, and suggests how to link them to existing backlog items or create new ones.
