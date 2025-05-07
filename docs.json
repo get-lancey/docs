@@ -1,0 +1,74 @@
+{
+	"$schema": "https://mintlify.com/docs.json",
+	"theme": "almond",
+	"name": "Lancey",
+	"colors": {
+		"primary": "#FFDD00",
+		"light": "#FFDD00",
+		"dark": "#FFD505"
+	},
+	"favicon": "/favicon.png",
+	"navigation": {
+		"groups": [
+			{
+				"group": "Get Started",
+				"pages": [
+					"start/introduction",
+					"start/quickstart",
+					{
+						"group": "Use cases",
+						"pages": [
+							"start/examples/1",
+							"start/examples/2",
+							"start/examples/3"
+						]
+					}
+				]
+			},
+			{
+				"group": "Setup",
+				"pages": ["setup/model", "setup/mcp", "setup/webhooks"]
+			},
+			{
+				"group": "Models",
+				"pages": [
+					"workflows/tables",
+					"workflows/columns",
+					"workflows/rows",
+					"workflows/cells"
+				]
+			}
+		]
+	},
+	"logo": {
+		"light": "/logo/light.svg",
+		"dark": "/logo/dark.svg"
+	},
+	"background": {
+		"image": "/background.png"
+	},
+	"navbar": {
+		"links": [
+			{
+				"label": "API",
+				"href": "https://api.prod.buttertable.com"
+			}
+		],
+		"primary": {
+			"type": "button",
+			"label": "Platform",
+			"href": "https://platform.buttertable.com"
+		}
+	},
+	"footer": {
+		"socials": {
+			"linkedin": "https://www.linkedin.com/company/getlancey"
+		}
+	},
+	"integrations": {
+		"posthog": {
+			"apiKey": "phc_L8cqHPgpKcJ6avzxp4q9ZLSiNSBgGSmJ64CkLaD1Drd",
+			"apiHost": "https://d2aymk9361dfrf.cloudfront.net"
+		}
+	}
+}
