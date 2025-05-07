@@ -1,7 +1,224 @@
 ---
 title: "Quickstart"
-description: "Welcome to Lancey"
+description: "Learn to build durable AI workflows in under 5 minutes."
 mode: "wide"
 ---
 
-This is your guide to getting started with Lancey. If you’re new to Lancey, this is the guide you should start with.
+## Overview
+
+Buttertable enables developers to define their AI workflows once and scale them to handle any workload size. With built-in safety and resilience, you can run these workflows across multiple LLM providers including OpenAI, Anthropic, Google, and others.
+
+Each workflow consists of three core components:
+
+- **Table**: The container for your workflow data
+- **Columns**: Define the output structure, prompt, and the LLM model to use
+- **Rows**: The actual data that flows through your workflow
+
+Buttertable ensures your AI workflows are:
+
+- **Scalable**: Run your workflows on workloads of any size
+- **Safe**: Built-in retry mechanisms and automatic recovery from failures
+- **Durable**: Rules are clearly defined and consistently applied
+- **Distributed**: Scale your workflows across multiple instances
+- **Provider-agnostic**: Switch between different LLM providers seamlessly
+- **Structured**: Get consistent, well-formatted outputs for your applications
+
+### In this quickstart, you will learn:
+
+- How to create a new **table**
+- How to define **columns** for structured output
+- How to add data **rows** to your table
+- How to receive results by setting up **webhooks**
+
+This guide will walk you through building a simple AI workflow that can be expanded to handle more complex use cases as you become familiar with Buttertable's capabilities.
+
+## Prerequisites
+
+- Account for [platform](https://platform.buttertable.com)
+
+## Account setup
+
+Before you can build AI workflows with Buttertable, you'll need to set up your account and obtain an Admin key to authenticate your requests.
+
+<Steps>
+  <Step title="Open the Buttertable platform">
+    Go to [platform](https://platform.buttertable.com) and log in to your
+    account.
+  </Step>
+  <Step title="Set up model provider">
+    Once logged in, then select **"Models"** in the sidebar under the
+    **Workspace** section. Setup one of the model providers by pasting an api
+    key from the provider.
+  </Step>
+  <Step title="Get buttertable Admin key">
+    Then select **"Admin keys"** in the sidebar under the **Workspace** section.
+  </Step>
+  <Step title="Generate a new Admin key">
+    Click on the "Create" button. Give your key a descriptive name (e.g.,
+    "Quickstart"). Copy and securely store your new Admin key - you'll need it
+    to authenticate your requests to the Buttertable API/SDK.
+  </Step>
+</Steps>
+
+## Installing the SDK
+
+Buttertable can be installed using your preferred package manager. The package provides a fully-typed SDK for interacting with the Buttertable API.
+
+<Note>
+  Make sure you have Node.js/bun installed (version 18 or higher recommended)
+  before installing @buttertable/js.
+</Note>
+
+<CodeGroup>
+
+```bash npm
+npm install @buttertable/js
+```
+
+```bash yarn
+yarn add @buttertable/js
+```
+
+```bash pnpm
+pnpm add @buttertable/js
+```
+
+```bash bun
+bun add @buttertable/js
+```
+
+</CodeGroup>
+
+<Tip>
+  We recommend using TypeScript for the best development experience with
+  @buttertable/js, as it provides type safety and better IDE integration.
+</Tip>
+
+## Your first workflow
+
+Now that you have your Admin key, you can start setting up your workflow. Let's create a simple example that demonstrates how to use Buttertable.
+
+<Warning>
+  Always use your Admin key in a secure backend environment and never expose it
+  in client-side code for security reasons.
+</Warning>
+
+<Steps>
+  <Step title="Initialize the Buttertable client">
+    First, initialize the Buttertable client with your Admin key.
+
+   <CodeGroup>
+    ```typescript bun
+    import { createButterTable } from "@buttertable/js/bun";
+
+    const bt = await createButterTable("<ADMIN_KEY>");
+
+    const project = await bt.projects.create({
+      name: "quickstart",
+      uid: "quickstart",
+    });
+
+    ```
+    ```typescript node
+    import { createButterTable } from "@buttertable/js/node";
+
+    const bt = await createButterTable("<ADMIN_KEY>");
+
+    const project = await bt.projects.create({
+      name: "quickstart",
+      uid: "quickstart",
+    });
+
+    ```
+    </CodeGroup>
+
+  </Step>
+  <Step title="Create a new table">
+    Next, create a table that will contain your workflow data.
+
+    ```typescript
+    const table = await project.tables.create({
+      name: "poem workflow",
+      description:
+        "A workflow for creating a poem and then classifying it as a cat or a dog poem",
+      uid: "poem-workflow",
+    });
+    ```
+
+  </Step>
+  <Step title="Define columns for structured output">
+    Define the columns that will structure your workflow outputs.
+
+    ```typescript
+
+    // generate a poem column
+    const poemColumn = await table.columns.create({
+      name: "poem",
+      uid: "poem",
+      definition: {
+        type: "ai",
+        model: "openai/gpt-4o-mini",
+        prompt:
+          "Write a poem about a cat or a dog named [[data]]. Make it short and sweet.", // [[data]] is a variable that will be replaced with the data from the row
+        output: {
+          type: "text",
+          multiple: false,
+        },
+      },
+    });
+
+    // classify the poem into which animal it is about
+    const animalMentionedColumn = await table.columns.create({
+      name: "Animal mentioned",
+      uid: "animal-mentioned",
+      definition: {
+        type: "ai",
+        model: "openai/gpt-4o-mini",
+        prompt: "Which animal is the {{poem}} about?", // {{poem}} references uid of the poem column
+        output: {
+          type: "classification",
+          multiple: false,
+          choices: ["dog", "cat"],
+        },
+      },
+    });
+    ```
+
+  </Step>
+  <Step title="Add data rows to your table">
+    Now, add some data rows that will be processed by your workflow.
+
+    ```typescript
+    // Add rows to your table
+    const row = await table.rows.create({
+      uid: "1",
+      value: "Oatmeal",
+    });
+    ```
+
+  </Step>
+  <Step title="Retrieve the results">
+    Finally, retrieve the results manually.
+
+    ```typescript
+    // we might have a wait for a few seconds for the AI to generate the poem
+    const cells = await row.cells({
+      columns: ["poem", "animal-mentioned"],
+    });
+
+    for (const cell of cells) {
+      console.log(cell.data);
+    }
+    ```
+
+  </Step>
+</Steps>
+
+With these steps, you've created a complete workflow that:
+
+1. Creates a table with a poem column
+2. Generates a poem about a name using AI
+3. Classifies which animal the poem is about
+4. Retrieves the generated content
+
+You can now run this code to set up your workflow, and Buttertable will handle the scaling and reliability of the workflow.
