@@ -6,7 +6,7 @@ sidebarTitle: "Quickstart"
 
 ## Overview
 
-Buttertable enables developers to define their AI workflows once and scale them to handle any workload size. With built-in safety and resilience, you can run these workflows across multiple LLM providers including OpenAI, Anthropic, Google, and others.
+butter enables developers to define their AI workflows once and scale them to handle any workload size. With built-in safety and resilience, you can run these workflows across multiple LLM providers including OpenAI, Anthropic, Google, and others.
 
 Each workflow consists of three core components:
 
@@ -14,14 +14,16 @@ Each workflow consists of three core components:
 - **Columns**: Define the output structure, prompt, and the LLM model to use
 - **Rows**: The actual data that flows through your workflow
 
-Buttertable ensures your AI workflows are:
+butter ensures your AI workflows are:
 
-- **Scalable**: Run your workflows on workloads of any size
-- **Safe**: Built-in retry mechanisms and automatic recovery from failures
-- **Durable**: Rules are clearly defined and consistently applied
-- **Distributed**: Scale your workflows across multiple instances
-- **Provider-agnostic**: Switch between different LLM providers seamlessly
-- **Structured**: Get consistent, well-formatted outputs for your applications
+- **Scalable:** Run your workflows on workloads of any size
+- **Safe:** Built-in retry mechanisms and automatic recovery from failures
+- **Durable:** Rules are clearly defined and consistently applied with automatic retries for failed steps
+- **Distributed:** Scale your workflows across multiple instances
+- **Provider-agnostic:** Switch between different LLM providers seamlessly
+- **Structured:** Get consistent, well-formatted outputs for your applications
+- **Managed Dependencies:** Don't worry about writing code to manage which data references need to run first
+- **Monitoring included:** Track your workflows and logs without additional setup
 
 In this quickstart, you will learn:
 
@@ -30,7 +32,7 @@ In this quickstart, you will learn:
 - How to add data **rows** to your table
 - How to receive results by setting up **webhooks**
 
-This guide will walk you through building a simple AI workflow that can be expanded to handle more complex use cases as you become familiar with Buttertable's capabilities.
+This guide will walk you through building a simple AI workflow that can be expanded to handle more complex use cases as you become familiar with butter's capabilities.
 
 ## Prerequisites
 
@@ -38,10 +40,10 @@ This guide will walk you through building a simple AI workflow that can be expan
 
 ## Account setup
 
-Before you can build AI workflows with Buttertable, you'll need to set up your account and obtain an Admin key to authenticate your requests.
+Before you can build AI workflows with butter, you'll need to set up your account and obtain an Admin key to authenticate your requests.
 
 <Steps>
-  <Step title="Open the Buttertable platform">
+  <Step title="Open the butter platform">
     Go to [platform](https://platform.buttertable.com) and log in to your
     account.
   </Step>
@@ -50,19 +52,19 @@ Before you can build AI workflows with Buttertable, you'll need to set up your a
     **Workspace** section. Setup one of the model providers by pasting an api
     key from the provider.
   </Step>
-  <Step title="Get buttertable Admin key">
+  <Step title="Get butter Admin key">
     Then select **"Admin keys"** in the sidebar under the **Workspace** section.
   </Step>
   <Step title="Generate a new Admin key">
     Click on the "Create" button. Give your key a descriptive name (e.g.,
     "Quickstart"). Copy and securely store your new Admin key - you'll need it
-    to authenticate your requests to the Buttertable API/SDK.
+    to authenticate your requests to the butter API/SDK.
   </Step>
 </Steps>
 
 ## Installing the SDK
 
-Buttertable can be installed using your preferred package manager. The package provides a fully-typed SDK for interacting with the Buttertable API.
+butter can be installed using your preferred package manager. The package provides a fully-typed SDK for interacting with the butter API.
 
 <Note>
   Make sure you have Node.js/bun installed (version 18 or higher recommended)
@@ -96,7 +98,7 @@ bun add @buttertable/js
 
 ## Your first workflow
 
-Now that you have your Admin key, you can start setting up your workflow. Let's create a simple example that demonstrates how to use Buttertable.
+Now that you have your Admin key, you can start setting up your workflow. Let's create a simple example that demonstrates how to use butter.
 
 <Warning>
   Always use your Admin key in a secure backend environment and never expose it
@@ -104,8 +106,8 @@ Now that you have your Admin key, you can start setting up your workflow. Let's 
 </Warning>
 
 <Steps>
-  <Step title="Initialize the Buttertable client">
-    First, initialize the Buttertable client with your Admin key.
+  <Step title="Initialize the butter client">
+    First, initialize the butter client with your Admin key.
 
    <CodeGroup>
     ```typescript bun
@@ -221,4 +223,4 @@ With these steps, you've created a complete workflow that:
 3. Classifies which animal the poem is about
 4. Retrieves the generated content
 
-You can now run this code to set up your workflow, and Buttertable will handle the scaling and reliability of the workflow.
+You can now run this code to set up your workflow, and butter will handle the scaling and reliability of the workflow.
