@@ -8,22 +8,48 @@ butter lets you define multi-step AI workflows—like parsing, enrichment, and c
 
 ## Key features
 
+- **Handle retries and errors: **We automatically retry failed steps and handle errors gracefully
+- **Manage references and dependencies:** Don't worry about writing code to manage which data references need to run first
+- **Monitoring included**: Track your workflows and logs without additional setup
+- **Fast and scalable: **Defer your backend logic to our fast and scalable platform
+
 ## What is durable execution?
 
+Durable execution means your workflow can run reliably over time even if parts of it fail, restart, or get interrupted. Each step is tracked, retried if needed, and its state is saved so you don’t lose progress.
+
+In practice, this means:
+
+- If a step fails, it can automatically retry or fall back without restarting the whole workflow
+- If your server restarts or crashes, the workflow picks up where it left off
+- You can see exactly what ran, what succeeded, what failed, and why
+
+This lets you run long-running, multi-step AI workflows (like document parsing or RAG) with confidence, without writing your own retry logic, state management, or monitoring system.
+
+We've built all the infra needed to get you to production in an afternoon.
+
 ## Quickstart guide
+
+<Steps>
+  <Step title="Create an account">
+    Make sure to [sign up ](https://platform.buttertable.com)and generate your API key.
+  </Step>
+  <Step title="Integrate the butter SDK">
+    Read our docs to find the SDK for your language of choice and get going. You can also exploore our example repos to get going faster.
+  </Step>
+  <Step title="Set up webhooks">
+    Get responses back once butter has finished processing your data.
+  </Step>
+</Steps>
 
 ## Use cases
 
 Explore some common examples of what you can build using butter:
 
-<CardGroup cols={3}>
-  <Card title="New Card" icon="sparkles">
-    
+<CardGroup cols={2}>
+  <Card title="Magic Columns" icon="table" iconType="solid" color="#FFDF50">
+    Build Clay/Hebbia style magic columns based on user LLMs prompts.
   </Card>
-  <Card title="New Card" icon="sparkles">
-    
-  </Card>
-  <Card title="New Card" icon="sparkles">
-    
+  <Card title="Document Processing" icon="file-pdf" iconType="solid" color="#FFDF50">
+    Set up AI rules to process documents like PDF and more.
   </Card>
 </CardGroup>
