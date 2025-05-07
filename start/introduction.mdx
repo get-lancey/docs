@@ -1,7 +1,87 @@
 ---
-title: "Introduction"
-description: "Welcome to Lancey"
-mode: "wide"
+title: "Introduction to butter"
+description: "Open-source durable execution for your AI workflows."
+sidebarTitle: "Introduction"
 ---
 
-This is your guide to getting started with Lancey. If you’re new to Lancey, this is the guide you should start with.
+butter lets you define multi-step AI workflows—like parsing, enrichment, and classification—and run them at scale, with built-in retries, versioning, and control.
+
+## Key features
+
+- **Handle retries and errors: **We automatically retry failed steps and handle errors gracefully
+- **Manage references and dependencies:** Don't worry about writing code to manage which data references need to run first
+- **Monitoring included**: Track your workflows and logs without additional setup
+- **Fast and scalable: **Defer your backend logic to our fast and scalable platform
+
+## What is durable execution?
+
+Durable execution means your workflow can run reliably over time even if parts of it fail, restart, or get interrupted. Each step is tracked, retried if needed, and its state is saved so you don’t lose progress.
+
+In practice, this means:
+
+- If a step fails, it can automatically retry or fall back without restarting the whole workflow
+- If your server restarts or crashes, the workflow picks up where it left off
+- You can see exactly what ran, what succeeded, what failed, and why
+
+This lets you run long-running, multi-step AI workflows (like document parsing or RAG) with confidence, without writing your own retry logic, state management, or monitoring system.
+
+We've built all the infra needed to get you to production in an afternoon.
+
+## Quickstart guide
+
+<Steps>
+  <Step title="Create an account">
+    Make sure to [sign up ](https://platform.buttertable.com)and generate your API key.
+  </Step>
+  <Step title="Integrate the butter SDK">
+    Read our docs to find the SDK for your language of choice and get going. You can also exploore our example repos to get going faster.
+  </Step>
+  <Step title="Set up webhooks">
+    Get responses back once butter has finished processing your data.
+  </Step>
+</Steps>
+
+## Use cases
+
+Explore some common examples of what you can build using butter:
+
+<CardGroup cols={2}>
+  <Card title="Magic Columns" icon="table" iconType="solid" color="#FFDF50">
+    Build Clay/Hebbia style magic columns based on user LLMs prompts.
+  </Card>
+  <Card title="Document Processing" icon="file-pdf" iconType="solid" color="#FFDF50">
+    Set up AI rules to process documents like PDF and more.
+  </Card>
+</CardGroup>
+
+## FAQs
+
+Common questions you'll likely have.
+
+<AccordionGroup>
+  <Accordion title="How is butter different from other LLM chaining tools?">
+    butter is a workflow engine, not a chaining library or dev tool. We focus on running, scaling, and managing LLM pipelines in production—durably, with full execution control, retries, and versioning.
+  </Accordion>
+  <Accordion title="How do I integrate butter?">
+    You can integrate butter using code via our SDKs or using our REST APIs. The underlying engine handles orchestration and state regardless of which method you choose.
+  </Accordion>
+  <Accordion title="What kinds of workflows can I run with butter?">
+    Any multi-step, LLM-powered flow: document parsing, RAG pipelines, data labeling, classification, summarization, enrichment, agent-like logic, and more.
+  </Accordion>
+  <Accordion title="Are you SOC2 compliant?">
+    Yes, we're SOC2 Type 2 complaint. You can also self-host if you'd like as we're open source.
+  </Accordion>
+</AccordionGroup>
+
+## Support
+
+Join our Disocrd community to connect with other developers or to book a demo to get help from our team:
+
+<CardGroup cols={2}>
+  <Card title="Discord" icon="comment" color="#FFDF50">
+    Join our Discord community to see what others are building user butter.
+  </Card>
+  <Card title="Demo" icon="calendar" color="#FFDF50" href="https://calendar.notion.so/meet/adipatel/demo">
+    Book a demo with our team to see how butter can help power your usecases.
+  </Card>
+</CardGroup>
