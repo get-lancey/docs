@@ -21,12 +21,12 @@
 	"topbarLinks": [
 		{
 			"name": "Home page",
-			"url": "https://lancey.ai"
+			"url": "https://buttertable.com"
 		}
 	],
 	"topbarCtaButton": {
 		"name": "Dashboard",
-		"url": "https://insight.lancey.ai"
+		"url": "https://platform.buttertable.com"
 	},
 	"navigation": [
 		{
