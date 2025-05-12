@@ -1,0 +1,72 @@
+---
+title: "Models"
+description: "Supported AI model providers and their models in butter"
+sidebarTitle: "Models"
+---
+
+## Overview
+
+butter supports multiple AI model providers, allowing you to choose the best model for your specific use case. When creating columns in your workflow, you can specify which model to use by providing the model identifier in the format `provider/model-name`.
+
+## OpenAI
+
+OpenAI provides access to their powerful language models through their API.
+
+#### Supported Models
+
+- `openai/gpt-4.1` - Flagship GPT model for complex tasks
+- `openai/gpt-4.1-nano` - Fastest, most cost-effective GPT-4.1 model
+- `openai/gpt-4.1-mini` - Balanced for intelligence, speed, and cost
+- `openai/gpt-4o` - Fast, intelligent, flexible GPT model
+- `openai/gpt-4o-mini` - Flagship GPT model for complex tasks
+- `openai/o4-mini` - Fast, affordable small model for focused tasks
+- `openai/o3` - Most powerful reasoning model
+- `openai/o3-mini` - A small model alternative to o3
+- `openai/o1` - Previous full o-series reasoning model
+- `openai/o1-pro` - Version of o1 with more compute for better responses
+
+You may use any other model from the [OpenAI model list](https://platform.openai.com/docs/models) by specifying the model identifier in the format `openai/model-name`.
+
+## Anthropic
+
+Anthropic's Claude models are known for their helpful and harmless responses.
+
+#### Supported Models
+
+- `anthropic/claude-3-7-sonnet-latest` - Balanced performance and cost
+- `anthropic/claude-3-5-haiku-latest` - Fast and efficient model
+
+You may use any other model from the [Anthropic model list](https://docs.anthropic.com/en/docs/about-claude/models/all-models) by specifying the model identifier in the format `anthropic/model-name`.
+
+## Google AI
+
+Google's Gemini models provide powerful AI capabilities.
+
+#### Supported Models
+
+- `google-ai/gemini-2.5-flash-preview-04-17` - Flash is a thinking model that offers great, well-rounded capabilities 
+- `google-ai/gemini-2.5-pro-preview-05-06` - Previous generation model
+- `google-ai/gemini-2.0-flash` - Flash delivers next-gen features and improved capabilities
+- `google-ai/gemini-2.0-flash-lite` - Flash-Lite is our fastest and most cost efficient Flash model
+
+You may use any other model from the [Google AI model list](https://cloud.google.com/vertex-ai/generative-ai/docs/models) by specifying the model identifier in the format `google-ai/model-name`.
+
+## Using Models in Your Workflow
+
+When creating columns in your workflow, you can specify which model to use by providing the model identifier in the `model` field of the column definition. Here's an example:
+
+```typescript
+const column = await table.columns.create({
+  name: "my-column",
+  uid: "my-column",
+  definition: {
+    type: "ai",
+    model: "openai/gpt-4.1", // Specify the model here
+    prompt: "Your prompt here",
+    output: {
+      type: "text",
+      multiple: false,
+    },
+  },
+});
+```

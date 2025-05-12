@@ -1,0 +1,240 @@
+---
+title: "Webhooks"
+description: "Set up webhooks to receive real-time updates from your butter workflows"
+sidebarTitle: "Webhooks"
+---
+
+## Overview
+
+Webhooks allow you to receive real-time notifications when your butter workflows complete their processing. This enables you to build event-driven applications that can react to workflow results as they happen.
+
+## Quickly set up a webhook
+
+Follow these steps to set up a webhook using the Butter platform:
+
+<Steps>
+  <Step title="Open the butter platform">
+    Go to [platform](https://platform.buttertable.com) and log in to your account.
+  </Step>
+  <Step title="Setup a webhook">
+    Once logged in, then select **Webhooks** in the sidebar under the
+    **Workspace** section. Click **Create** to add a new webhook.
+  </Step>
+  <Step title="Fill in the webhook details">
+    <ul>
+      <li><b>Name</b>: Enter a descriptive name for your webhook (e.g., <code>test</code>).</li>
+      <li><b>URL</b>: Enter the endpoint where you want to receive webhook events (e.g., <code>http://localhost:3000</code>).</li>
+      <li><b>Enabled</b>: Toggle this on to activate the webhook.</li>
+      <li><b>Events</b>: Select the events you want to receive. (See the full list below.)</li>
+      <li><b>Headers</b>: Optionally, add custom headers that will be sent with the webhook request (e.g., for authentication).</li>
+    </ul>
+  </Step>
+  <Step title="Save your webhook">
+    After saving, you will be given a webhook secret. This is used to verify the webhook request. 
+    <img src="/images/webhook.png" alt="Webhook setup UI" style={{borderRadius: '8px', margin: '24px 0'}} />
+
+  <Warning>
+    Keep your webhook secret secure and never expose it in client-side code. This secret is used to verify that webhook requests are coming from butter and should be treated with the same security considerations as an API key.
+  </Warning>
+  </Step>
+</Steps>
+
+
+## Webhook Events
+
+You can select any combination of the following events for your webhook:
+
+- `table.created`: Triggered when a table is created
+- `table.updated`: Triggered when a table is updated
+- `table.deleted`: Triggered when a table is deleted
+- `table.row.created`: Triggered when a row is created
+- `table.row.updated`: Triggered when a row is updated
+- `table.row.deleted`: Triggered when a row is deleted
+- `table.column.created`: Triggered when a column is created
+- `table.column.updated`: Triggered when a column is updated
+- `table.column.deleted`: Triggered when a column is deleted
+- `table.cell.updated`: Triggered when a cell is updated
+- `table.view.created`: Triggered when a view is created
+- `table.view.updated`: Triggered when a view is updated
+- `table.view.deleted`: Triggered when a view is deleted
+
+## Webhook Payload
+
+When a webhook is triggered, butter will send a POST request to your specified URL with a JSON payload. Here's an example of what the payload looks like:
+
+```jsonc
+{
+  "type": "<event-type>",
+  "data": {
+    // depends on the event type
+  }
+}
+```
+
+## Verifying Webhooks in Your Backend
+
+<Steps>
+  <Step title="Install the Butter SDK">
+    <CodeGroup>
+      ```bash npm
+      npm install @buttertable/js
+      ```
+      ```bash yarn
+      yarn add @buttertable/js
+      ```
+      ```bash pnpm
+      pnpm add @buttertable/js
+      ```
+      ```bash bun
+      bun add @buttertable/js
+      ```
+    </CodeGroup>
+  </Step>
+  <Step title="Initialize the Butter client">
+    <CodeGroup>
+      ```typescript bun
+      import { createButterTable } from "@buttertable/js/bun";
+      const bt = await createButterTable("<ADMIN_KEY>");
+      ```
+      ```typescript node
+      import { createButterTable } from "@buttertable/js/node";
+      const bt = await createButterTable("<ADMIN_KEY>");
+      ```
+    </CodeGroup>
+  </Step>
+  <Step title="Verify and parse the webhook">
+    Use the helper to both verify the signature and parse the event:
+    
+    <CodeGroup>
+    ```typescript Express
+    // Example Express.js handler
+    import express from 'express';
+    const app = express();
+    
+    // Use raw body parser middleware
+    app.use(express.raw({ type: 'application/json' }));
+    
+    app.post("/webhook-endpoint", async (req, res) => {
+      const signature = req.headers["buttertable-signature"];
+      const timestamp = req.headers["buttertable-timestamp"];
+      const payload = req.body.toString(); // Ensure this is a string!
+      const webhookSecret = process.env.BUTTER_WEBHOOK_SECRET;
+    
+      try {
+        const event = await bt.webhooks.constructEvent(
+          signature,
+          timestamp,
+          payload,
+          webhookSecret
+        );
+        // event.type, event.data, etc.
+        // Handle the event
+        res.status(200).send("Received!");
+      } catch (err) {
+        res.status(400).send(`Webhook Error: ${err.message}`);
+      }
+    });
+    ```
+    
+    ```typescript Fastify
+    // Example Fastify handler
+    import Fastify from 'fastify';
+    const fastify = Fastify();
+    
+    // Configure raw body handling
+    fastify.addContentTypeParser('application/json', { parseAs: 'string' }, (req, body, done) => {
+      done(null, body);
+    });
+    
+    fastify.post("/webhook-endpoint", async (request, reply) => {
+      const signature = request.headers["buttertable-signature"];
+      const timestamp = request.headers["buttertable-timestamp"];
+      const payload = request.body; // Already a string from our parser
+      const webhookSecret = process.env.BUTTER_WEBHOOK_SECRET;
+    
+      try {
+        const event = await bt.webhooks.constructEvent(
+          signature,
+          timestamp,
+          payload,
+          webhookSecret
+        );
+        // event.type, event.data, etc.
+        // Handle the event
+        return reply.code(200).send("Received!");
+      } catch (err) {
+        return reply.code(400).send(`Webhook Error: ${err.message}`);
+      }
+    });
+    ```
+    
+    ```typescript Hono
+    // Example Hono handler
+    import { Hono } from 'hono';
+    const app = new Hono();
+    
+    app.post("/webhook-endpoint", async (c) => {
+      const signature = c.req.header("buttertable-signature");
+      const timestamp = c.req.header("buttertable-timestamp");
+      const payload = await c.req.text(); // Get raw body as string
+      const webhookSecret = process.env.BUTTER_WEBHOOK_SECRET;
+    
+      try {
+        const event = await bt.webhooks.constructEvent(
+          signature,
+          timestamp,
+          payload,
+          webhookSecret
+        );
+        // event.type, event.data, etc.
+        // Handle the event
+        return c.text("Received!", 200);
+      } catch (err) {
+        return c.text(`Webhook Error: ${err.message}`, 400);
+      }
+    });
+    ```
+    
+    ```typescript Elysia
+    // Example Elysia handler
+    import { Elysia } from 'elysia';
+    const app = new Elysia();
+    
+    app.post("/webhook-endpoint", async ({ request, set }) => {
+      const signature = request.headers.get("buttertable-signature");
+      const timestamp = request.headers.get("buttertable-timestamp");
+      const payload = await request.text(); // Get raw body as string
+      const webhookSecret = process.env.BUTTER_WEBHOOK_SECRET;
+    
+      try {
+        const event = await bt.webhooks.constructEvent(
+          signature,
+          timestamp,
+          payload,
+          webhookSecret
+        );
+        // event.type, event.data, etc.
+        // Handle the event
+        set.status = 200;
+        return "Received!";
+      } catch (err) {
+        set.status = 400;
+        return `Webhook Error: ${err.message}`;
+      }
+    });
+    ```
+    </CodeGroup>
+    
+    <Note>
+      The payload passed to `constructEvent` must be a **string**. Make sure your server provides the raw request body as a string (not a Buffer or parsed object). In Express, you can use a middleware like `express.raw({ type: 'application/json' })` and then call `req.rawBody.toString()`.
+    </Note>
+  </Step>
+</Steps>
+
+## Best Practices
+
+1. **Always verify webhook signatures** to ensure the requests are coming from butter
+2. **Handle duplicate events** - butter may send the same webhook multiple times to ensure delivery
+3. **Respond quickly** - your webhook endpoint should respond within 5 seconds
+4. **Use HTTPS** - always use HTTPS endpoints for your webhooks
+5. **Keep your webhook secret secure** - never expose it in client-side code
