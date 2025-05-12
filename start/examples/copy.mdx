@@ -1,0 +1,134 @@
+---
+title: "Translating Content into Multiple Languages"
+description: "Convert content from one language to another"
+sidebarTitle: "Multilingual translation"
+---
+
+
+## Overview
+
+This example demonstrates how to use butter to automatically translate content from English into multiple languages. This is useful for businesses that need to localize their content for international audiences.
+
+## Use Case
+
+A marketing team needs to translate blog posts, product descriptions, or customer communications into multiple languages to reach a global audience. Manually translating content is time-consuming and expensive.
+
+## Solution with butter
+
+Using butter, you can create a workflow that automatically translates content from English into any number of target languages using AI models.
+
+> **Prerequisites**: Make sure you've completed the [quickstart guide](/start/quickstart) to set up your butter account and workspace.
+
+<Steps>
+  <Step title="Define columns for original content and translations">
+    Create columns for the original English content and each target language.
+
+    ```typescript
+    // Spanish translation column
+    const spanishColumn = await table.columns.create({
+      name: "Spanish Translation",
+      uid: "spanish-translation",
+      definition: {
+        type: "ai",
+        model: "openai/gpt-4o",
+        prompt: "Translate the following English text into Spanish, maintaining the original tone, style, and formatting: [[data]]",
+        output: {
+          type: "text",
+          multiple: false,
+        },
+      },
+    });
+
+    // French translation column
+    const frenchColumn = await table.columns.create({
+      name: "French Translation",
+      uid: "french-translation",
+      definition: {
+        type: "ai",
+        model: "openai/gpt-4o",
+        prompt: "Translate the following English text into French, maintaining the original tone, style, and formatting: [[data]]",
+        output: {
+          type: "text",
+          multiple: false,
+        },
+      },
+    });
+
+    // German translation column
+    const germanColumn = await table.columns.create({
+      name: "German Translation",
+      uid: "german-translation",
+      definition: {
+        type: "ai",
+        model: "openai/gpt-4o",
+        prompt: "Translate the following English text into German, maintaining the original tone, style, and formatting: [[data]]",
+        output: {
+          type: "text",
+          multiple: false,
+        },
+      },
+    });
+    ```
+  </Step>
+
+  <Step title="Add content to be translated">
+    Add rows with the original English content that needs translation.
+
+    ```typescript
+    // Add a product description to translate
+    const productRow = await table.rows.create({
+      uid: "product-description",
+      value:  "Our premium wireless headphones offer crystal-clear sound quality with deep bass and noise cancellation technology. Perfect for music lovers on the go, these lightweight headphones provide up to 30 hours of battery life and connect seamlessly to all your devices."
+    });
+
+    // Add a marketing message to translate
+    const marketingRow = await table.rows.create({
+      uid: "marketing-message",
+      value: "Join us for our Summer Sale! For a limited time only, enjoy 40% off all products storewide. Don't miss this opportunity to upgrade your tech at unbeatable prices."
+    });
+    ```
+  </Step>
+
+  <Step title="Retrieve the translations">
+    After the AI has processed the content, retrieve the translations.
+
+    ```typescript
+    // Wait a moment for translations to complete
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
+    // Retrieve translations for the product description
+    const productCells = await productRow.cells({
+      columns: ["spanish-translation", "french-translation", "german-translation"],
+    });
+
+    console.log("Product Description Translations:");
+    for (const cell of productCells) {
+      console.log(cell.data);
+    }
+
+    // Retrieve translations for the marketing message
+    const marketingCells = await marketingRow.cells({
+      columns: ["spanish-translation", "french-translation", "german-translation"],
+    });
+
+    console.log("\nMarketing Message Translations:");
+    for (const cell of marketingCells) {
+      console.log(cell.data);
+    }
+    ```
+  </Step>
+</Steps>
+
+## Benefits
+
+- **Efficiency**: Translate content into multiple languages simultaneously
+- **Consistency**: Maintain consistent translations across all your content
+- **Scalability**: Easily add more languages or content as needed
+- **Cost-effective**: Reduce costs compared to professional translation services
+- **Speed**: Get translations in seconds rather than days or weeks
+
+## Extensions
+
+- Add a quality check column that uses AI to verify the translations
+- Create a webhook to automatically notify your team when translations are complete
+- Integrate with your CMS to automatically publish translated content

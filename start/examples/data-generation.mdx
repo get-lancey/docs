@@ -1,0 +1,138 @@
+---
+title: "Generating Synthetic Data with AI"
+description: "Create realistic synthetic data for testing and development"
+sidebarTitle: "Data generation"
+---
+
+## Overview
+
+This example demonstrates how to use butter to automatically generate synthetic data for testing and development purposes. This is useful for creating realistic datasets without compromising real user data or when you need large volumes of test data quickly.
+
+## Use Case
+
+A development team needs realistic test data for a new e-commerce platform. They need product listings, customer profiles, and order histories that mimic real-world data patterns but don't contain any actual user information.
+
+## Solution with butter
+
+Using butter, you can create a workflow that generates synthetic data with realistic patterns and relationships using AI models.
+
+> **Prerequisites**: Make sure you've completed the [quickstart guide](/start/quickstart) to set up your butter account and workspace.
+
+<Steps>
+  <Step title="Define columns for data generation">
+    Create columns to generate different types of synthetic data.
+
+    ```typescript
+    // Product description generator
+    const productColumn = await table.columns.create({
+      name: "Product Description",
+      uid: "product-description",
+      definition: {
+        type: "ai",
+        model: "openai/gpt-4o",
+        prompt: "Generate a realistic product description for an e-commerce item. Include details about features, specifications, and benefits. Make it sound professional and engaging: [[data]]",
+        output: {
+          type: "text",
+          multiple: false,
+        },
+      },
+    });
+
+    // Customer profile generator
+    const customerColumn = await table.columns.create({
+      name: "Customer Profile",
+      uid: "customer-profile",
+      definition: {
+        type: "ai",
+        model: "openai/gpt-4o",
+        prompt: "Generate a realistic customer profile with demographics, preferences, and shopping behavior. Format as JSON with fields: age, location, interests, average_order_value, preferred_categories: [[data]]",
+        output: {
+          type: "text",
+          multiple: false,
+        },
+      },
+    });
+
+    // Order history generator
+    const orderColumn = await table.columns.create({
+      name: "Order History",
+      uid: "order-history",
+      definition: {
+        type: "ai",
+        model: "openai/gpt-4o",
+        prompt: "Generate a realistic order history for an e-commerce customer. Include order dates, items, quantities, and total amounts. Format as JSON array of orders: [[data]]",
+        output: {
+          type: "text",
+          multiple: false,
+        },
+      },
+    });
+    ```
+  </Step>
+
+  <Step title="Add seed data for generation">
+    Add rows with seed data to guide the generation process.
+
+    ```typescript
+    // Add product category seeds
+    const electronicsRow = await table.rows.create({
+      uid: "electronics-products",
+      value: "Category: Electronics, Price Range: $100-$500, Target Audience: Tech-savvy professionals"
+    });
+
+    const fashionRow = await table.rows.create({
+      uid: "fashion-products",
+      value: "Category: Fashion, Price Range: $20-$200, Target Audience: Young adults"
+    });
+
+    // Add customer segment seeds
+    const premiumCustomerRow = await table.rows.create({
+      uid: "premium-customers",
+      value: "Segment: Premium, Age Range: 30-50, Income Level: High, Shopping Frequency: Monthly"
+    });
+
+    const regularCustomerRow = await table.rows.create({
+      uid: "regular-customers",
+      value: "Segment: Regular, Age Range: 18-35, Income Level: Medium, Shopping Frequency: Quarterly"
+    });
+    ```
+  </Step>
+
+  <Step title="Retrieve the generated data">
+    After the AI has processed the seed data, retrieve the generated content.
+
+    ```typescript
+    // Wait a moment for generation to complete
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
+    // Process all rows
+    const rows = [electronicsRow, fashionRow, premiumCustomerRow, regularCustomerRow];
+    
+    for (const row of rows) {
+      const cells = await row.cells({
+        columns: ["product-description", "customer-profile", "order-history"],
+      });
+
+      console.log("\nGenerated Data:");
+      for (const cell of cells) {
+        console.log(cell.data);
+      }
+    }
+    ```
+  </Step>
+</Steps>
+
+## Benefits
+
+- **Privacy**: Generate realistic data without using real user information
+- **Volume**: Create large datasets quickly for testing and development
+- **Consistency**: Maintain data patterns and relationships across generations
+- **Customization**: Generate data specific to your use case and requirements
+- **Quality**: Produce realistic, well-structured data that mimics real-world patterns
+
+## Extensions
+
+- Add validation columns to ensure generated data meets specific criteria
+- Create a webhook to automatically export generated data to your database
+- Add relationship constraints to maintain referential integrity
+- Implement data variation controls to generate diverse but consistent datasets

@@ -151,6 +151,8 @@ Now that you have your Admin key, you can start setting up your workflow. Let's 
   <Step title="Define columns for structured output">
     Define the columns that will structure your workflow outputs.
 
+
+
     ```typescript
 
     // generate a poem column
@@ -185,6 +187,15 @@ Now that you have your Admin key, you can start setting up your workflow. Let's 
       },
     });
     ```
+
+    <Note>
+      **Variable Reference Syntax:**
+      - Use `[[data]]` to reference the full raw data from the row
+      - Use `[[data.property]]` or `[[data.property.nested]]` to reference specific properties or nested properties from the row data
+      - Use `{{column-uid}}` to reference data from another column (like `{{poem}}` above)
+      
+      These variables will be automatically replaced with the actual values when the AI processes each row.
+    </Note>
 
   </Step>
   <Step title="Add data rows to your table">

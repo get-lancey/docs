@@ -18,24 +18,23 @@
 					{
 						"group": "Use cases",
 						"pages": [
-							"start/examples/1",
-							"start/examples/2",
-							"start/examples/3"
+							"start/examples/copy",
+							"start/examples/feedback",
+							"start/examples/data-generation"
 						]
 					}
 				]
 			},
 			{
 				"group": "Setup",
-				"pages": ["setup/model", "setup/mcp", "setup/webhooks"]
+				"pages": ["setup/model", "setup/webhooks"]
 			},
 			{
-				"group": "Models",
+				"group": "Learn",
 				"pages": [
-					"workflows/tables",
-					"workflows/columns",
-					"workflows/rows",
-					"workflows/cells"
+					"learn/tables",
+					"learn/columns",
+					"learn/rows"
 				]
 			}
 		]

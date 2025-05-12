@@ -1,0 +1,134 @@
+---
+title: "Processing Customer Feedback with AI"
+description: "Process and analyze customer feedback using AI"
+sidebarTitle: "Feedback analysis"
+---
+
+## Overview
+
+This example demonstrates how to use butter to automatically process and analyze customer feedback. This is useful for businesses that want to understand customer sentiment, extract key insights, and categorize feedback automatically.
+
+## Use Case
+
+A customer support team receives hundreds of feedback messages daily across different channels. Manually reading and categorizing each piece of feedback is time-consuming and prone to human bias.
+
+## Solution with butter
+
+Using butter, you can create a workflow that automatically processes feedback, extracts sentiment, identifies key topics, and suggests appropriate actions.
+
+> **Prerequisites**: Make sure you've completed the [quickstart guide](/start/quickstart) to set up your butter account and workspace.
+
+<Steps>
+  <Step title="Define columns for feedback analysis">
+    Create columns to process and analyze the feedback.
+
+    ```typescript
+    // Sentiment analysis column
+    const sentimentColumn = await table.columns.create({
+      name: "Sentiment Analysis",
+      uid: "sentiment-analysis",
+      definition: {
+        type: "ai",
+        model: "openai/gpt-4o",
+        prompt: "Analyze the sentiment of the following customer feedback. Respond with one of: Positive, Negative, or Neutral. Include a brief explanation: [[data]]",
+        output: {
+          type: "text",
+          multiple: false,
+        },
+      },
+    });
+
+    // Topic extraction column
+    const topicsColumn = await table.columns.create({
+      name: "Key Topics",
+      uid: "key-topics",
+      definition: {
+        type: "ai",
+        model: "openai/gpt-4o",
+        prompt: "Extract the main topics from this customer feedback. List them as comma-separated values: [[data]]",
+        output: {
+          type: "text",
+          multiple: false,
+        },
+      },
+    });
+
+    // Action suggestion column
+    const actionColumn = await table.columns.create({
+      name: "Suggested Action",
+      uid: "suggested-action",
+      definition: {
+        type: "ai",
+        model: "openai/gpt-4o",
+        prompt: "Based on this customer feedback, suggest a specific action the support team should take. Be concise and actionable: [[data]]",
+        output: {
+          type: "text",
+          multiple: false,
+        },
+      },
+    });
+    ```
+  </Step>
+
+  <Step title="Add feedback to process">
+    Add rows with customer feedback that needs analysis.
+
+    ```typescript
+    // Add positive feedback
+    const positiveFeedback = await table.rows.create({
+      uid: "positive-feedback",
+      value: "I absolutely love the new mobile app! The interface is intuitive and the features are exactly what I needed. The customer service team was also very helpful when I had questions about the premium features."
+    });
+
+    // Add negative feedback
+    const negativeFeedback = await table.rows.create({
+      uid: "negative-feedback",
+      value: "The website keeps crashing when I try to check out. I've lost my cart twice now and had to start over. This is really frustrating and I might have to shop elsewhere if this continues."
+    });
+
+    // Add neutral feedback
+    const neutralFeedback = await table.rows.create({
+      uid: "neutral-feedback",
+      value: "I received my order on time. The product quality is as expected. Would appreciate more color options in the future."
+    });
+    ```
+  </Step>
+
+  <Step title="Retrieve the analysis">
+    After the AI has processed the feedback, retrieve the analysis results.
+
+    ```typescript
+    // Wait a moment for processing to complete
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
+    // Process all feedback
+    const feedbackRows = [positiveFeedback, negativeFeedback, neutralFeedback];
+    
+    for (const row of feedbackRows) {
+      const cells = await row.cells({
+        columns: ["sentiment-analysis", "key-topics", "suggested-action"],
+      });
+
+      console.log("\nFeedback Analysis:");
+      for (const cell of cells) {
+        console.log(cell.data);
+      }
+    }
+    ```
+  </Step>
+</Steps>
+
+## Benefits
+
+- **Efficiency**: Process hundreds of feedback messages automatically
+- **Consistency**: Apply the same analysis criteria to all feedback
+- **Scalability**: Handle increasing volumes of feedback without additional resources
+- **Insights**: Quickly identify patterns and trends in customer feedback
+- **Actionable**: Get specific recommendations for addressing feedback
+
+## Extensions
+
+- Add a priority scoring column to identify urgent issues
+- Create a webhook to notify relevant teams based on feedback categories
+- Integrate with your CRM to automatically create support tickets
+- Add a language detection column to handle multilingual feedback
