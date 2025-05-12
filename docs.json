@@ -50,7 +50,7 @@
 		"links": [
 			{
 				"label": "API",
-				"href": "https://api.prod.buttertable.com"
+				"href": "https://api.prod.buttertable.com/docs"
 			}
 		],
 		"primary": {
