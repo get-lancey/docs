@@ -18,9 +18,9 @@
 					{
 						"group": "Use cases",
 						"pages": [
-							"start/examples/copy",
-							"start/examples/feedback",
-							"start/examples/data-generation"
+							"start/usecases/copy",
+							"start/usecases/feedback",
+							"start/usecases/data-generation"
 						]
 					}
 				]
